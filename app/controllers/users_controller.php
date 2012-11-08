@@ -8,6 +8,10 @@ class UsersController extends Controller {
 		if(!empty($this->data)) {
 			if(empty($this->data['User']['username'])) {
 				$this->Session->setFlash('You cannot leave the username blank');
+			} elseif (strlen($this->data['User']['username']) < 3) {
+				$this->Session->setFlash('Username length must be at least 3 characters.');
+			} elseif (!ctype_alnum($this->data['User']['username'])) {
+				$this->Session->setFlash('Username must be alphanumeric.');
 			} else {
 				$this->User->save($this->data);
 				$this->Session->setFlash('User saved.');
