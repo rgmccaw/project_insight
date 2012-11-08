@@ -1,2 +1,2 @@
 app/tmp/*
-app/config/passwords.php
+app/config/passwords.local.php
