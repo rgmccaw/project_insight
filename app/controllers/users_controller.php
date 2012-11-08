@@ -18,7 +18,16 @@ class UsersController extends Controller {
 			}
 		}
 
-		$users = $this->User->find('all');
+		/**
+		 * Eg: find('all', array(
+		 *			'conditions' => array('name' => 'Thomas Anderson'),
+		 *			'fields' => array('name', 'email'),
+		 *			'order' => 'field3 DESC',
+		 *			'recursive' => 2,
+		 *			'group' => 'type'));
+		 */
+
+		$users = $this->User->find('all', array());
 
 		$size  = sizeof($users);
 		for ($i=0; $i<$size; $i++) {
