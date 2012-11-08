@@ -76,9 +76,10 @@
  * database. Uses database default.
  *
  */
+
+require_once('passwords.local.php');
 class DATABASE_CONFIG {
 
-	require_once('passwords.local.php');
 
 	var $default = array(
 		'driver' => 'mysql',
