@@ -6,10 +6,33 @@ class UsersController extends Controller {
 
 	function add() {
 		if(!empty($this->data)) {
-			$this->User->save($this->data);
+			if(empty($this->data['User']['username'])) {
+				$this->Session->setFlash('You cannot leave the username blank');
+			} else {
+				$this->User->save($this->data);
+				$this->Session->setFlash('User saved.');
+			}
 		}
 
-		$displayUsers = $this->User->find('all');
+		$users = $this->User->find('all');
+
+		$size  = sizeof($users);
+		for ($i=0; $i<$size; $i++) {
+			for ($c=0; $c<$size; $c++) {
+				if ($users[$i]['User']['username'] < $users[$c]['User']['username']) {
+					$tmp = $users[$c];
+					$users[$c] = $users[$i];	
+					$users[$i] = $tmp;
+				}
+			}
+
+		}
+
+		$displayUsers = array();
+		foreach ($users as $user) {
+			$displayUsers[] = '<b>'.$user['User']['username'].'</b> has the ID '.$user['User']['id'].'.<br />';
+		}
+
 		$this->set(compact('displayUsers'));
 	}
 
