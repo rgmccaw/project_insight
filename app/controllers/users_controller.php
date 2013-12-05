@@ -45,6 +45,9 @@ class UsersController extends Controller {
 			array_push($displayUsers, '<b>'.$user['User']['username'].'</b> has the ID '.$user['User']['id'].'.<br />');
 		}
 
+		// This line is standard CakePHP code:
+		// it ensures that whatever value $displayUsers has in this controller is made available
+		// in the view as $displayUsers as well. This line works as intended.
 		$this->set(compact('displayUsers'));
 	}
 
